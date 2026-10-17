@@ -11,6 +11,8 @@ import helmet from "helmet";
 import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import axios from "axios";
 import geoip from "geoip-lite";
+import morgan from "morgan";
+import chalk from "chalk";
 async function bootstrap() {
   const fromWhere = async (ip) => {
     try {
@@ -79,6 +81,7 @@ async function bootstrap() {
     },
   });
   app.use(cors(), helmet(), limmeter, express.json());
+  app.use(morgan("dev"));
 
   // DB
   await connectDB();
@@ -189,6 +192,12 @@ async function bootstrap() {
   //error-handling
   app.use(globalErrorHandling);
 
-  app.listen(port, () => console.log(`server is running on port ${port}`));
+  app.listen(port, () =>
+    console.log(
+      chalk.bgGreen(
+        chalk.hex("#FFA500")(`Server is Running on port....${port}`),
+      ),
+    ),
+  );
 }
 export default bootstrap;

@@ -66,21 +66,16 @@ router.get(
     });
   },
 );
-router.get(
-  "/getAllMessages",
-  authentication(),
-  validation(validators.getMessage),
-  async (req, res, next) => {
-    const messages = await getAllMessages(req.user);
-    return successResponce({
-      res,
-      status: 200,
-      data: {
-        messages,
-      },
-    });
-  },
-);
+router.get("/getAllMessages", authentication(), async (req, res, next) => {
+  const messages = await getAllMessages(req.user);
+  return successResponce({
+    res,
+    status: 200,
+    data: {
+      messages,
+    },
+  });
+});
 router.delete(
   "/:receiverID",
   authentication(),

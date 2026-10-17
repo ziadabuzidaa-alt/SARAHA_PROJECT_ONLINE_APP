@@ -59,21 +59,10 @@ export const getMessage = async (messageID, user) => {
 export const getAllMessages = async (user) => {
   const messages = await find({
     filter: {
-      $or: [
-        {
-          receiverID: user._id,
-          senderID: user._id,
-        },
-      ],
+      $or: [{ receiverId: user._id }, { senderId: user._id }],
     },
-    select: "-senderId",
     model: messageModel,
   });
-  if (!messages) {
-    throw NotFoundException({
-      message: "Invalid Message or not authorized ation",
-    });
-  }
   return messages;
 };
 

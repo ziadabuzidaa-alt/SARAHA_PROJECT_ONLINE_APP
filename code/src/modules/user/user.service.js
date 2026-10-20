@@ -12,12 +12,7 @@ import {
   remainingRefreshTtl,
   RoleEnum,
 } from "../../common/index.js";
-import {
-  create,
-  deleteMany,
-  findOne,
-  findOneAndUpdate,
-} from "../../DB/db.repository.js";
+import { findOne, findOneAndUpdate } from "../../DB/db.repository.js";
 import { tokenModel, userModel } from "../../DB/index.js";
 import { unlink } from "node:fs/promises";
 import {
